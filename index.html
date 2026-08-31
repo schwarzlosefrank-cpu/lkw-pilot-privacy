@@ -66,7 +66,10 @@
     padding: 20px;
   }
   .card h3 { margin: 0 0 8px; font-size: 16px; }
-  .card p { margin: 0; color: var(--muted); font-size: 14px; }
+  .card p { margin: 0 0 10px; color: var(--muted); font-size: 14px; }
+  .card p:last-child { margin-bottom: 0; }
+  .card p.how { padding-top: 10px; border-top: 1px solid var(--border); font-size: 13px; line-height: 1.55; }
+  .card p.how b { color: var(--text); }
   footer {
     border-top: 1px solid var(--border); margin-top: 40px; padding: 24px 0 40px;
     color: var(--muted); font-size: 14px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px;
@@ -107,27 +110,33 @@
     <div class="grid">
       <div class="card">
         <h3>🕐 Zeiterfassung per NFC</h3>
-        <p>Dienstbeginn und -ende per NFC-Aufkleber im Fahrzeug stempeln – Handy antippen, fertig.</p>
+        <p>Dienstbeginn und -ende per NFC-Aufkleber im Fahrzeug stempeln.</p>
+        <p class="how"><b>So funktioniert's:</b> Handy an den Aufkleber im Fahrzeug halten – die App öffnet sich von selbst und stempelt automatisch. Die tatsächliche Stempelzeit (Rohzeit) und die gerundete Arbeitszeit werden getrennt gespeichert. Ohne Aufkleber geht's auch manuell, mit Begründung.</p>
       </div>
       <div class="card">
         <h3>📋 Stundenzettel</h3>
-        <p>Wochenübersicht mit Kilometern, Zeiten, Diesel- und AdBlue-Verbrauch. Digitale Unterschrift, PDF-Versand.</p>
+        <p>Wochenübersicht mit Kilometern, Zeiten, Diesel- und AdBlue-Verbrauch.</p>
+        <p class="how"><b>So funktioniert's:</b> Kilometerstände und Zeiten füllen sich größtenteils automatisch aus den Stempelungen. Am Wochenende direkt am Handy unterschreiben und den fertigen Stundenzettel als PDF per WhatsApp oder E-Mail verschicken.</p>
       </div>
       <div class="card">
         <h3>🗺️ Tourenplanung</h3>
-        <p>Kundenlisten automatisch einlesen, nach eigener Reihenfolge sortieren, Kunden abhaken.</p>
+        <p>Kundenlisten automatisch einlesen, nach eigener Reihenfolge sortieren.</p>
+        <p class="how"><b>So funktioniert's:</b> Kundenliste aus einer WhatsApp-Nachricht per Teilen-Funktion übernehmen – die App erkennt Namen und Orte automatisch. Unterwegs jeden Stopp mit einem Antippen abhaken, Navigation startet direkt aus der App.</p>
       </div>
       <div class="card">
         <h3>🔧 Schaden, Panne &amp; Unfall</h3>
         <p>Strukturierte Meldungen mit Fotos, Standort per GPS und allen wichtigen Angaben.</p>
+        <p class="how"><b>So funktioniert's:</b> Formular ausfüllen, Fotos direkt mit der Handykamera aufnehmen, Standort per Knopfdruck per GPS bestimmen lassen. Fertige Meldung in einem Schritt per WhatsApp weiterleiten.</p>
       </div>
       <div class="card">
         <h3>📄 Lieferschein &amp; Dokumente</h3>
-        <p>CMR-Dokumente digital unterschreiben, Papierdokumente scannen und als PDF versenden.</p>
+        <p>CMR-Dokumente digital unterschreiben, Papierdokumente scannen.</p>
+        <p class="how"><b>So funktioniert's:</b> Digitalen CMR öffnen, mit dem Finger unterschreiben, direkt als PDF zurücksenden. Papierbelege stattdessen einfach mit der Dokumentenkamera abfotografieren – die App erstellt automatisch ein fertiges PDF.</p>
       </div>
       <div class="card">
         <h3>🔒 Datenschutz zuerst</h3>
         <p>Keine Werbung, kein Tracking, keine Cloud. Alle Daten bleiben auf dem Gerät.</p>
+        <p class="how"><b>So funktioniert's:</b> Die App läuft komplett offline, es gibt kein Benutzerkonto und keine Serververbindung. Eine Sicherungskopie lässt sich jederzeit manuell als Datei erstellen und bei Bedarf wiederherstellen.</p>
       </div>
     </div>
 
