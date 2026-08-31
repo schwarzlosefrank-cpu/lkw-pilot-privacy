@@ -76,10 +76,10 @@
   .card.open .arrow { transform: rotate(180deg); }
   .card > p { margin: 0; color: var(--muted); font-size: 14px; }
   .card .details {
-    max-height: 0; overflow: hidden; transition: max-height .25s ease, margin-top .25s ease;
+    max-height: 0; overflow: hidden; transition: max-height .3s ease, margin-top .3s ease;
     margin-top: 0;
   }
-  .card.open .details { max-height: 600px; margin-top: 14px; }
+  .card.open .details { margin-top: 14px; }
   .card .details p { margin: 0 0 10px; color: var(--muted); font-size: 13px; line-height: 1.6; padding-top: 12px; border-top: 1px solid var(--border); }
   .card .details p:first-child { padding-top: 0; border-top: none; }
   .card .details p:last-child { margin-bottom: 0; }
@@ -187,8 +187,28 @@
   </div>
 <script>
 function toggleCard(el) {
-  el.classList.toggle('open');
+  var details = el.querySelector('.details');
+  var isOpen = el.classList.contains('open');
+  if (isOpen) {
+    details.style.maxHeight = details.scrollHeight + 'px';
+    requestAnimationFrame(function() {
+      details.style.maxHeight = '0px';
+    });
+    el.classList.remove('open');
+  } else {
+    el.classList.add('open');
+    details.style.maxHeight = details.scrollHeight + 'px';
+    details.addEventListener('transitionend', function fix() {
+      if (el.classList.contains('open')) details.style.maxHeight = 'none';
+      details.removeEventListener('transitionend', fix);
+    });
+  }
 }
+window.addEventListener('resize', function() {
+  document.querySelectorAll('.card.open .details').forEach(function(d) {
+    d.style.maxHeight = 'none';
+  });
+});
 </script>
 </body>
 </html>
