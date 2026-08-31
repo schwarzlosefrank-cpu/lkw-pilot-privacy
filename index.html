@@ -66,10 +66,25 @@
     padding: 20px;
   }
   .card h3 { margin: 0 0 8px; font-size: 16px; }
-  .card p { margin: 0 0 10px; color: var(--muted); font-size: 14px; }
-  .card p:last-child { margin-bottom: 0; }
-  .card p.how { padding-top: 10px; border-top: 1px solid var(--border); font-size: 13px; line-height: 1.55; }
-  .card p.how b { color: var(--text); }
+  .card {
+    text-align: left; width: 100%; cursor: pointer; font-family: inherit;
+    color: var(--text); transition: border-color .15s;
+  }
+  .card:hover { border-color: var(--blue); }
+  .card h3 { display:flex; align-items:center; justify-content:space-between; gap:8px; }
+  .card .arrow { color: var(--muted); font-size: 13px; transition: transform .2s; flex-shrink:0; }
+  .card.open .arrow { transform: rotate(180deg); }
+  .card > p { margin: 0; color: var(--muted); font-size: 14px; }
+  .card .details {
+    max-height: 0; overflow: hidden; transition: max-height .25s ease, margin-top .25s ease;
+    margin-top: 0;
+  }
+  .card.open .details { max-height: 600px; margin-top: 14px; }
+  .card .details p { margin: 0 0 10px; color: var(--muted); font-size: 13px; line-height: 1.6; padding-top: 12px; border-top: 1px solid var(--border); }
+  .card .details p:first-child { padding-top: 0; border-top: none; }
+  .card .details p:last-child { margin-bottom: 0; }
+  .card .details b { color: var(--text); }
+  .card .details code { background: var(--navy2); border: 1px solid var(--border); border-radius: 4px; padding: 1px 6px; font-size: 12px; }
   footer {
     border-top: 1px solid var(--border); margin-top: 40px; padding: 24px 0 40px;
     color: var(--muted); font-size: 14px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px;
@@ -107,37 +122,60 @@
     </div>
 
     <h2>Was LKW-Pilot kann</h2>
+    <p style="color:var(--muted);font-size:14px;margin:-8px 0 20px;">Zum Aufklappen antippen</p>
     <div class="grid">
-      <div class="card">
-        <h3>🕐 Zeiterfassung per NFC</h3>
+
+      <button class="card" onclick="toggleCard(this)">
+        <h3>🕐 Zeiterfassung per NFC <span class="arrow">▾</span></h3>
         <p>Dienstbeginn und -ende per NFC-Aufkleber im Fahrzeug stempeln.</p>
-        <p class="how"><b>So funktioniert's:</b> Handy an den Aufkleber im Fahrzeug halten – die App öffnet sich von selbst und stempelt automatisch. Die tatsächliche Stempelzeit (Rohzeit) und die gerundete Arbeitszeit werden getrennt gespeichert. Ohne Aufkleber geht's auch manuell, mit Begründung.</p>
-      </div>
-      <div class="card">
-        <h3>📋 Stundenzettel</h3>
+        <div class="details">
+          <p><b>Im Alltag:</b> Handy an den Aufkleber im Fahrzeug halten – die App öffnet sich von selbst und stempelt automatisch. Die tatsächliche Stempelzeit (Rohzeit) und die gerundete Arbeitszeit werden getrennt gespeichert. Ohne Aufkleber geht's auch manuell, mit Begründung.</p>
+          <p><b>Einmalige Einrichtung – welchen Aufkleber kaufen:</b> Ein gewöhnlicher NFC-Aufkleber funktioniert auf Metall (Armaturenbrett, Lenksäule) oft nicht richtig, weil das Metall das Signal abschirmt. Für die Anbringung auf oder nahe Metall braucht es einen Aufkleber mit der Bezeichnung „on-metal“ bzw. „anti-metal“ (Chip-Typ NTAG213 reicht). Auf Kunststoff oder Glas reicht ein normaler NFC-Aufkleber. Erhältlich z. B. bei Amazon oder eBay, meist im 10er-Pack für wenige Euro.</p>
+          <p><b>Aufkleber beschreiben:</b> Dazu die kostenlose App „NFC Tools“ (Play Store) verwenden: Reiter „Schreiben“ → Datensatz „Anwendung starten“ mit dem Paket <code>app.lkwpilot.fahrerapp</code> hinzufügen, dazu einen zweiten Datensatz „Text“ mit dem Kennzeichen des Fahrzeugs. Auf „Schreiben“ tippen und das Handy an den leeren Aufkleber halten.</p>
+          <p><b>Anbringen:</b> Fest am Fahrzeug ankleben, gut mit der Handy-Rückseite erreichbar, danach testweise antippen. Jedes Fahrzeug braucht seinen eigenen Aufkleber.</p>
+        </div>
+      </button>
+
+      <button class="card" onclick="toggleCard(this)">
+        <h3>📋 Stundenzettel <span class="arrow">▾</span></h3>
         <p>Wochenübersicht mit Kilometern, Zeiten, Diesel- und AdBlue-Verbrauch.</p>
-        <p class="how"><b>So funktioniert's:</b> Kilometerstände und Zeiten füllen sich größtenteils automatisch aus den Stempelungen. Am Wochenende direkt am Handy unterschreiben und den fertigen Stundenzettel als PDF per WhatsApp oder E-Mail verschicken.</p>
-      </div>
-      <div class="card">
-        <h3>🗺️ Tourenplanung</h3>
+        <div class="details">
+          <p><b>So funktioniert's:</b> Kilometerstände und Zeiten füllen sich größtenteils automatisch aus den Stempelungen. Am Wochenende direkt am Handy unterschreiben und den fertigen Stundenzettel als PDF per WhatsApp oder E-Mail verschicken.</p>
+        </div>
+      </button>
+
+      <button class="card" onclick="toggleCard(this)">
+        <h3>🗺️ Tourenplanung <span class="arrow">▾</span></h3>
         <p>Kundenlisten automatisch einlesen, nach eigener Reihenfolge sortieren.</p>
-        <p class="how"><b>So funktioniert's:</b> Kundenliste aus einer WhatsApp-Nachricht per Teilen-Funktion übernehmen – die App erkennt Namen und Orte automatisch. Unterwegs jeden Stopp mit einem Antippen abhaken, Navigation startet direkt aus der App.</p>
-      </div>
-      <div class="card">
-        <h3>🔧 Schaden, Panne &amp; Unfall</h3>
+        <div class="details">
+          <p><b>So funktioniert's:</b> Kundenliste aus einer WhatsApp-Nachricht per Teilen-Funktion übernehmen – die App erkennt Namen und Orte automatisch. Die App merkt sich die eigene, gewohnte Reihenfolge der Orte dauerhaft und sortiert künftige Touren automatisch danach. Unterwegs jeden Stopp mit einem Antippen abhaken, die Navigation zum nächsten Kunden startet direkt aus der App heraus, ohne Adresse abtippen zu müssen.</p>
+        </div>
+      </button>
+
+      <button class="card" onclick="toggleCard(this)">
+        <h3>🔧 Schaden, Panne &amp; Unfall <span class="arrow">▾</span></h3>
         <p>Strukturierte Meldungen mit Fotos, Standort per GPS und allen wichtigen Angaben.</p>
-        <p class="how"><b>So funktioniert's:</b> Formular ausfüllen, Fotos direkt mit der Handykamera aufnehmen, Standort per Knopfdruck per GPS bestimmen lassen. Fertige Meldung in einem Schritt per WhatsApp weiterleiten.</p>
-      </div>
-      <div class="card">
-        <h3>📄 Lieferschein &amp; Dokumente</h3>
+        <div class="details">
+          <p><b>So funktioniert's:</b> Formular ausfüllen, Fotos direkt mit der Handykamera aufnehmen, Standort per Knopfdruck per GPS bestimmen lassen. Fertige Meldung in einem Schritt per WhatsApp weiterleiten.</p>
+        </div>
+      </button>
+
+      <button class="card" onclick="toggleCard(this)">
+        <h3>📄 Lieferschein &amp; Dokumente <span class="arrow">▾</span></h3>
         <p>CMR-Dokumente digital unterschreiben, Papierdokumente scannen.</p>
-        <p class="how"><b>So funktioniert's:</b> Digitalen CMR öffnen, mit dem Finger unterschreiben, direkt als PDF zurücksenden. Papierbelege stattdessen einfach mit der Dokumentenkamera abfotografieren – die App erstellt automatisch ein fertiges PDF.</p>
-      </div>
-      <div class="card">
-        <h3>🔒 Datenschutz zuerst</h3>
+        <div class="details">
+          <p><b>So funktioniert's:</b> Digitalen CMR öffnen, mit dem Finger unterschreiben, direkt als PDF zurücksenden. Papierbelege stattdessen einfach mit der Dokumentenkamera abfotografieren – die App erstellt automatisch ein fertiges PDF.</p>
+        </div>
+      </button>
+
+      <button class="card" onclick="toggleCard(this)">
+        <h3>🔒 Datenschutz zuerst <span class="arrow">▾</span></h3>
         <p>Keine Werbung, kein Tracking, keine Cloud. Alle Daten bleiben auf dem Gerät.</p>
-        <p class="how"><b>So funktioniert's:</b> Die App läuft komplett offline, es gibt kein Benutzerkonto und keine Serververbindung. Eine Sicherungskopie lässt sich jederzeit manuell als Datei erstellen und bei Bedarf wiederherstellen.</p>
-      </div>
+        <div class="details">
+          <p><b>So funktioniert's:</b> Die App läuft komplett offline, es gibt kein Benutzerkonto und keine Serververbindung. Eine Sicherungskopie lässt sich jederzeit manuell als Datei erstellen und bei Bedarf wiederherstellen.</p>
+        </div>
+      </button>
+
     </div>
 
     <footer>
@@ -147,5 +185,10 @@
       </span>
     </footer>
   </div>
+<script>
+function toggleCard(el) {
+  el.classList.toggle('open');
+}
+</script>
 </body>
 </html>
